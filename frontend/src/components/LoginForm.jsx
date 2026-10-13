@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import TunePassword from "../components/TunePassword";
 import { useToast } from "./ToastContext";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 import "../pages/LoginPage.css";
 
 export default function LoginForm() {
@@ -19,7 +21,7 @@ export default function LoginForm() {
 		setErrorMessage("");
 
 		try {
-			const response = await fetch("http://localhost:5001/api/users/login", {
+			const response = await fetch(`${API_URL}/api/users/login`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ email, password: tunePassword }),
@@ -28,26 +30,26 @@ export default function LoginForm() {
 			const data = await response.json();
 			if (!response.ok) {
 				const failureMessage = data.error || "Something went wrong";
-                setErrorMessage(failureMessage);
-                
-                // Trigger Error Toast!
-                showErrorToast(failureMessage); 
-                return;
+				setErrorMessage(failureMessage);
+
+				// Trigger Error Toast!
+				showErrorToast(failureMessage);
+				return;
 			}
 
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("isAdmin", data.isAdmin);
 			// alert("Logged in successfully!"); UGLY LOCAL HOST TOAST
-			showRetroToast("Logged in Successfully!")
+			showRetroToast("Logged in Successfully!");
 
 			// navigate("/console"); // ← uncomment when ready
 			navigate("/browse");
 		} catch (error) {
 			const connError = "Failed to connect to the server.";
-            // setErrorMessage(connError); the red text
+			// setErrorMessage(connError); the red text
 
 			//custom toast
-            showErrorToast(connError);
+			showErrorToast(connError);
 		}
 	};
 

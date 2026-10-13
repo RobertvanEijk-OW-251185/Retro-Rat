@@ -6,6 +6,8 @@ import Img1 from "../assets/product-img.png";
 import Img2 from "../assets/Image (Classic Game Console Controller).png";
 import Img3 from "../assets/Image (Sony Walkman Cassette Player).png";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 import LogoutBtnComp from "../components/LogOutBtnComponent";
 
 import { Link, Route, Routes, NavLink } from "react-router-dom";
@@ -117,7 +119,7 @@ function UserConsolePage({ id }) {
 		const fetchMyListings = async () => {
 			try {
 				const token = localStorage.getItem("token");
-				const res = await fetch("http://localhost:5001/api/listings/my", {
+				const res = await fetch(`${API_URL}api/listings/my`, {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				if (!res.ok) throw new Error("Failed to fetch listings");
@@ -151,7 +153,7 @@ function UserConsolePage({ id }) {
 		if (!confirm("Delete this listing? This can't be undone.")) return;
 		try {
 			const token = localStorage.getItem("token");
-			const res = await fetch(`http://localhost:5001/api/listings/${id}`, {
+			const res = await fetch(`${API_URL}/api/listings/${id}`, {
 				method: "DELETE",
 				headers: { Authorization: `Bearer ${token}` },
 			});

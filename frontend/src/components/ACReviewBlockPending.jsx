@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "../pages/AdminConsolePage.css";
 import ACBlockListItem from "./ACBlockListItem";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ACReviewBlockPending() {
 	// 1... Fetch Pending listings
 	const [listings, setListings] = useState([]);
@@ -15,7 +17,7 @@ function ACReviewBlockPending() {
 				// const res = await fetch("http://localhost:5001/api/listings", {
 				// 	headers: { Authorization: `Bearer ${token}` },
 				// });
-				const res = await fetch("http://localhost:5001/api/listings/pending", {
+				const res = await fetch(`${API_URL}/listings/pending`, {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				if (!res.ok) throw new Error("Failed to fetch pending listings");
@@ -33,7 +35,7 @@ function ACReviewBlockPending() {
 	// 2... Handle the approval of listings
 	const handleApprove = async (id) => {
 		const token = localStorage.getItem("token");
-		await fetch(`http://localhost:5001/api/listings/${id}`, {
+		await fetch(`${API_URL}/listings/${id}`, {
 			method: "PUT",
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -47,7 +49,7 @@ function ACReviewBlockPending() {
 	// 3... Handle the denial of listings
 	const handleDeny = async (id) => {
 		const token = localStorage.getItem("token");
-		await fetch(`http://localhost:5001/api/listings/${id}`, {
+		await fetch(`${API_URL}/listings/${id}`, {
 			method: "PUT",
 			headers: {
 				Authorization: `Bearer ${token}`,

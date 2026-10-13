@@ -18,7 +18,6 @@ dist-ssr
 .idea
 .DS_Store
 server/.env
-.env
 *.suo
 *.ntvs*
 *.njsproj
