@@ -5,13 +5,13 @@ import TunePassword from "../components/TunePassword";
 
 import LocationIcon from "../assets/locationIcon.svg";
 import { useToast } from "./ToastContext";
+import { apiPost } from "../client";
 import "../pages/LoginPage.css";
 
 export default function SignUpForm() {
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [tunePassword, setTunePassword] = useState("--------");
-	const [errorMessage, setErrorMessage] = useState("");
 	const navigate = useNavigate();
 
 	const { showRetroToast, showErrorToast } = useToast();
@@ -27,39 +27,26 @@ export default function SignUpForm() {
 	// Borrowed from Remmy's code on the Submit Product form
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setErrorMessage("");
-
 		try {
-			const response = await fetch("http://localhost:5001/api/users/register", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					name: username,
-					email,
-					password: tunePassword,
-					location: form.location,
-				}),
+			await apiPost("/users/register", {
+				name: username,
+				email,
+				password: tunePassword,
+				location: form.location,
 			});
 
-			const data = await response.json();
-			if (!response.ok) {
-				const failureMsg = data.error || "Something went wrong";
-                setErrorMessage(failureMsg);
-                
-                
-                showErrorToast(failureMsg);
-			}
-			const successMsg = "Account created! Please log in."
-			
+			const successMsg = "Account created! Please log in.";
 			// alert(successMsg);
 			console.log("Account Created Successfully");
-			
+
 			showRetroToast(successMsg);
 			navigate("/login"); // ← redirect to login after signup
 		} catch (error) {
-			setErrorMessage("Failed to connect to the server.");
-			showErrorToast("Failed to connect to the server.")
-			console.log(errorMessage);
+			const failureMsg =
+				error.message === "Failed to fetch"
+					? "Failed to connect to the server."
+					: error.message;
+			showErrorToast(failureMsg);
 		}
 	};
 

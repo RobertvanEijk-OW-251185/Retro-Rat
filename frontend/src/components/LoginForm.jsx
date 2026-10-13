@@ -3,39 +3,24 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import TunePassword from "../components/TunePassword";
 import { useToast } from "./ToastContext";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { apiPost } from "../client";
 
 import "../pages/LoginPage.css";
 
 export default function LoginForm() {
 	const [email, setEmail] = useState("");
 	const [tunePassword, setTunePassword] = useState("--------");
-	const [errorMessage, setErrorMessage] = useState("");
 	const navigate = useNavigate();
 
 	const { showRetroToast, showErrorToast } = useToast();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setErrorMessage("");
-
 		try {
-			const response = await fetch(`${API_URL}/api/users/login`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password: tunePassword }),
+			const data = await apiPost("/users/login", {
+				email,
+				password: tunePassword,
 			});
-
-			const data = await response.json();
-			if (!response.ok) {
-				const failureMessage = data.error || "Something went wrong";
-				setErrorMessage(failureMessage);
-
-				// Trigger Error Toast!
-				showErrorToast(failureMessage);
-				return;
-			}
 
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("isAdmin", data.isAdmin);
@@ -45,11 +30,11 @@ export default function LoginForm() {
 			// navigate("/console"); // ← uncomment when ready
 			navigate("/browse");
 		} catch (error) {
-			const connError = "Failed to connect to the server.";
-			// setErrorMessage(connError); the red text
-
-			//custom toast
-			showErrorToast(connError);
+			const failureMessage =
+				error.message === "Failed to fetch"
+					? "Failed to connect to the server."
+					: error.message;
+			showErrorToast(failureMessage);
 		}
 	};
 
