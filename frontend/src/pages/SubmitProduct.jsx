@@ -107,7 +107,7 @@ export default function SubmitProduct() {
 			formDataPayload.append("image", imageFile);
 
 			// Step 3: Send the package at your backend pipeline
-			const res = await fetch(`${API_URL}/api/listings`, {
+			const res = await fetch(`${API_URL}/listings`, {
 				method: "POST",
 				headers: {
 					// Present the token to the backend for verification and authentication

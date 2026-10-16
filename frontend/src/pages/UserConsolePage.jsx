@@ -119,7 +119,7 @@ function UserConsolePage({ id }) {
 		const fetchMyListings = async () => {
 			try {
 				const token = localStorage.getItem("token");
-				const res = await fetch(`${API_URL}api/listings/my`, {
+				const res = await fetch(`${API_URL}/listings/my`, {
 					headers: { Authorization: `Bearer ${token}` },
 				});
 				if (!res.ok) throw new Error("Failed to fetch listings");
@@ -153,7 +153,7 @@ function UserConsolePage({ id }) {
 		if (!confirm("Delete this listing? This can't be undone.")) return;
 		try {
 			const token = localStorage.getItem("token");
-			const res = await fetch(`${API_URL}/api/listings/${id}`, {
+			const res = await fetch(`${API_URL}/listings/${id}`, {
 				method: "DELETE",
 				headers: { Authorization: `Bearer ${token}` },
 			});
