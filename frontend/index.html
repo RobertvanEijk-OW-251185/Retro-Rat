@@ -38,12 +38,14 @@
 
 			// POPIA Consent
 			gtag("consent", "default", {
-				analytics_storage: "denied",
+				analytics_storage:
+					localStorage.getItem("retro-rat-analytics-consent") === "granted"
+						? "granted"
+						: "denied",
 				ad_storage: "denied",
 				ad_user_data: "denied",
 				ad_personalization: "denied",
 			});
-			gtag("consent", "update", { analytics_storage: "granted" });
 
 			gtag("config", "%VITE_GA_ID%");
 		</script>

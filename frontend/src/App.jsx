@@ -28,6 +28,7 @@ import SignUpForm from "./components/SignUpForm";
 // Import Browser Router stuff...
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Footer from "./components/Footer";
+import CookieConsent from "./components/CookieConsent";
 
 // I added this becuase everytime i navigated to a page from home it too my to the bottom of the page for some reason T-T
 import ScrollToTop from "./components/ScrollToTop";
@@ -64,6 +65,7 @@ function App() {
 				<Footer></Footer>
 				</ToastProvider>
 			</BrowserRouter>
+			<CookieConsent />
 		</>
 	);
 }
