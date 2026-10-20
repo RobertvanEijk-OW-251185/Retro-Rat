@@ -13,6 +13,9 @@ import DescriptionIcon from "../assets/descriptionIcon.svg";
 
 import { uploadImage } from "../cloudinary";
 
+// Google Analytics
+import { trackEvent } from "../analytics";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 
@@ -120,6 +123,12 @@ export default function SubmitProduct() {
 				const errData = await res.json();
 				throw new Error(errData.error || "Submission failed");
 			}
+			trackEvent("submit_listing", {
+				currency: "ZAR",
+				value: Number(form.price),
+				item_category: form.category,
+				item_condition: form.condition,
+			});
 		} catch (err) {
 			setError(err.message);
 		} finally {

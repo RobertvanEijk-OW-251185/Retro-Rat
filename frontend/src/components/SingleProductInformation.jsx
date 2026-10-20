@@ -6,6 +6,9 @@ import FlagButtonComponent from "./FlagButtonComponent";
 import SellerContainerComponent from "./SellerContainerComponent";
 import DeleteItemBtn from "./AdminDeleteItemBtnComponent";
 
+// Google Analytics
+import { toAnalyticsItem, trackEvent } from "../analytics";
+
 // FontAwesome icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -52,6 +55,11 @@ function SingleProductInformation({ listing }) {
 	const handleAddToCart = async () => {
 		try {
 			await apiPost("/cart", { listingId: listing._id });
+			trackEvent("add_to_cart", {
+				currency: "ZAR",
+				value: Number(listing.price),
+				items: [toAnalyticsItem(listing)],
+			});
 		} catch (err) {
 			console.error("Couldn't add to cart:", err);
 		}
@@ -60,6 +68,11 @@ function SingleProductInformation({ listing }) {
 	const handleBuyNow = async () => {
 		try {
 			await apiPost("/cart", { listingId: listing._id });
+			trackEvent("add_to_cart", {
+				currency: "ZAR",
+				value: Number(listing.price),
+				items: [toAnalyticsItem(listing)],
+			});
 			navigate("/cart");
 		} catch (err) {
 			console.error("Couldn't add to cart:", err);

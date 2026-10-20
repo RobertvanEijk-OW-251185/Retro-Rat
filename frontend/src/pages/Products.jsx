@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import ProductCard from "../components/ProductCard";
 import "./Products.css";
 
@@ -7,6 +7,9 @@ import FilterBar from "../components/FilterBar";
 import Footer from "../components/Footer";
 import { apiGet } from "../client";
 import TetrisBackground from "../components/TetrisBackground";
+
+// Google Analytics
+import { toAnalyticsItem, trackEvent } from "../analytics";
 
 //import Img1 from "../assets/product-img.png"; //NOTE: TEMP, until we get something decided on for images.
 
@@ -63,6 +66,7 @@ export default function ProductsPage() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [selectedTags, setSelectedTags] = useState([]);
+	const lastTrackedListingIds = useRef(null);
 
 	useEffect(() => {
 		// --- TEMPORARY DUMMY DATA LOADER FOR BACKGROUND TESTING ---
@@ -105,6 +109,19 @@ export default function ProductsPage() {
 		});
 	}, [listings, selectedTags]);
 
+	useEffect(() => {
+		if (loading || error || filteredListings.length === 0) return;
+
+		const listingIds = filteredListings.map((listing) => listing._id).join(",");
+		if (lastTrackedListingIds.current === listingIds) return;
+
+		lastTrackedListingIds.current = listingIds;
+		trackEvent("view_item_list", {
+			item_list_name: "Shop products",
+			items: filteredListings.map(toAnalyticsItem),
+		});
+	}, [error, filteredListings, loading]);
+
 	return (
 		<div className="tetris-page-wrapper">
 			<TetrisBackground />
@@ -121,7 +138,6 @@ export default function ProductsPage() {
 				<FilterBar onFilterChange={setSelectedTags} />
 
 				<Row className="product-card-container">
-				
 					{
 						loading && (
 							<p className="error-text">Loading listings...</p>
@@ -139,19 +155,19 @@ export default function ProductsPage() {
 								: "No listings match your filters."}
 						</p>
 					)}
-<div className="product-card-masonry">
-					{filteredListings.map((listing) => (
-						<ProductCard
-							key={listing._id} //react prop, used to know if something is the same or not when reloading the component.
-							id={listing._id} //the actual id property of the listing
-							title={listing.productName} //rest of this stuff just follows the schema
-							year={listing.era}
-							username={listing.seller?.name || "unknown"} //if no name then show unknown
-							price={`R${listing.price.toFixed(2)}`} //formatting done here*******
-							condition={listing.condition}
-							imgSrc={listing.mainImage} //we gonna get back to this (listing.mainImage is the actual thing to go here)
-						/>
-					))}
+					<div className="product-card-masonry">
+						{filteredListings.map((listing) => (
+							<ProductCard
+								key={listing._id} //react prop, used to know if something is the same or not when reloading the component.
+								id={listing._id} //the actual id property of the listing
+								title={listing.productName} //rest of this stuff just follows the schema
+								year={listing.era}
+								username={listing.seller?.name || "unknown"} //if no name then show unknown
+								price={`R${listing.price.toFixed(2)}`} //formatting done here*******
+								condition={listing.condition}
+								imgSrc={listing.mainImage} //we gonna get back to this (listing.mainImage is the actual thing to go here)
+							/>
+						))}
 					</div>
 				</Row>
 			</Container>

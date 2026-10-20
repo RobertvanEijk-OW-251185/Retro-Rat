@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { apiPost } from "../client";
+
+// Google analytics
+import { toAnalyticsItem, trackEvent } from "../analytics";
 import "./CartOrderSumComponent.css";
 
 const SHIPPING = 50;
@@ -19,6 +22,12 @@ function CartOrderSummaryComp({ listings = [], onCheckout }) {
 			return;
 		try {
 			await apiPost("/cart/checkout");
+			trackEvent("purchase", {
+				currency: "ZAR",
+				value: total,
+				shipping,
+				items: listings.map(toAnalyticsItem),
+			});
 			onCheckout?.();
 			navigate("/");
 		} catch (err) {

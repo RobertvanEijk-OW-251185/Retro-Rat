@@ -8,6 +8,9 @@ import { useToast } from "./ToastContext";
 import { apiPost } from "../client";
 import "../pages/LoginPage.css";
 
+// Google Analytics
+import { trackEvent } from "../analytics";
+
 export default function SignUpForm() {
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
@@ -34,6 +37,7 @@ export default function SignUpForm() {
 				password: tunePassword,
 				location: form.location,
 			});
+			trackEvent("sign_up", { method: "email" });
 
 			const successMsg = "Account created! Please log in.";
 			// alert(successMsg);

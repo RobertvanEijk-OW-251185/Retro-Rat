@@ -5,6 +5,9 @@ import TunePassword from "../components/TunePassword";
 import { useToast } from "./ToastContext";
 import { apiPost } from "../client";
 
+// Google Analytics
+import { trackEvent } from "../analytics";
+
 import "../pages/LoginPage.css";
 
 export default function LoginForm() {
@@ -22,6 +25,7 @@ export default function LoginForm() {
 				password: tunePassword,
 			});
 
+			trackEvent("login", { method: "email" });
 			localStorage.setItem("token", data.token);
 			localStorage.setItem("isAdmin", data.isAdmin);
 			// alert("Logged in successfully!"); UGLY LOCAL HOST TOAST
