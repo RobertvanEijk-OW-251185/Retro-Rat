@@ -98,10 +98,21 @@ npm install
 ## 5. Configure Environment Variables:
 Create a .env file in the root directory and add the necessary config variables.
 
-Code snippet
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_super_secret_key
+SITE_URL=https://your-deployed-domain
+```
+
+Set `SITE_URL` to the public origin where the production React site is served,
+without a trailing slash. The Express server uses it to serve `/sitemap.xml`
+with the homepage, shop, and approved product listings, and `/robots.txt` with
+the sitemap URL. After deploying, open
+`https://your-deployed-domain/sitemap.xml` and
+`https://your-deployed-domain/robots.txt` to verify both responses, then submit
+`sitemap.xml` in Google Search Console.
+
 Execute Application:
 Open your terminal in the root directory and run the start command:
 

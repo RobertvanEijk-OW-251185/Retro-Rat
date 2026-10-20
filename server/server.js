@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
+const seoRoutes = require("./routes/seoRoutes");
+app.use("/", seoRoutes);
+
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "../frontend/dist")));
 }
