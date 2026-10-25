@@ -3,7 +3,7 @@
 # 💾 RetroRat: The Ultimate Vintage Tech Time Machine
 ## Old Tech, New Hands 
 
-![BannerImage](Retro-Rat/src/assets/ReadMeImages/BannerImage.png)
+![BannerImage](frontend/src/assets/ReadMeImages/BannerImage.png)
 
 > **"Welcome to the grid."** > 
 > Did you spend your childhood blowing into cartridges? Do you miss the warm, analogue hiss of a cassette tape? **RetroRat Market** isn't just an e-commerce platform; it's a comeback. We are building the ultimate digital flea market for vintage tech, retro games, and analogue media, all wrapped up in a glorious, pixel-perfect 90s desktop aesthetic.
@@ -14,7 +14,7 @@
 
 We aren't just selling nostalgia; we're wrapping you in it. RetroOS Market is a full-stack e-commerce web application designed for collectors, tinkerers, and retro-tech enthusiasts. 
 
-![Image1](Retro-Rat/src/assets/ReadMeImages/HomePage.png)
+![Image1](frontend/src/assets/ReadMeImages/HomePage.png)
 
 ---
 
@@ -28,11 +28,11 @@ Users exploring RetroRat will have full access to:
 * **🖨️ The Message Boards (Comments):** Jump into the comment section on any item. Ask the seller about the specs, negotiate, or just geek out over shared nostalgia with the community.
 * **🗑️ Drag to Trash:** Changed your mind about selling that old Macintosh? Easily delete and manage your live postings.
 
-![Image1](Retro-Rat/src/assets/ReadMeImages/Home2.png)
-![Image1](Retro-Rat/src/assets/ReadMeImages/SignUp.png)
-![Image1](Retro-Rat/src/assets/ReadMeImages/SignIn.png)
-![Image1](Retro-Rat/src/assets/ReadMeImages/InvalidToast.png)
-![Image1](Retro-Rat/src/assets/ReadMeImages/SuccessToast.png)
+![Image1](frontend/src/assets/ReadMeImages/Home2.png)
+![Image1](frontend/src/assets/ReadMeImages/SignUp.png)
+![Image1](frontend/src/assets/ReadMeImages/SignIn.png)
+![Image1](frontend/src/assets/ReadMeImages/InvalidToast.png)
+![Image1](frontend/src/assets/ReadMeImages/SuccessToast.png)
 
 ---
 
@@ -134,9 +134,9 @@ npm run dev
 
 ## Mockups
 
-![Desktop1](Retro-Rat/src/assets/ReadMeImages/Mockups/Desktop1.png)
-![Desktop2](Retro-Rat/src/assets/ReadMeImages/Mockups/Desktop2.png)
-![Laptop1](Retro-Rat/src/assets/ReadMeImages/Mockups/Laptop1.png)
+![Desktop1](frontend/src/assets/ReadMeImages/Mockups/Desktop1.png)
+![Desktop2](frontend/src/assets/ReadMeImages/Mockups/Desktop2.png)
+![Laptop1](frontend/src/assets/ReadMeImages/Mockups/Laptop1.png)
 
 ---
 
