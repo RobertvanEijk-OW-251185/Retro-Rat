@@ -36,6 +36,16 @@ Users exploring RetroRat will have full access to:
 
 ---
 
+## This project has been deployed on 2 sites (The project's deployment will end between November 10th and December 5th)
+
+### Heroku Deployed Link
+https://retroratdeploy-7212e4705943.herokuapp.com/
+
+### AWS Deployed Link
+http://retro-rat-aws-deploy-env.eba-xgmgvipp.eu-north-1.elasticbeanstalk.com/
+
+---
+
 ## 🛠️ Under the Hood (No Dial-Up Required)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![ExpressJS](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
