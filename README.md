@@ -18,6 +18,18 @@ We aren't just selling nostalgia; we're wrapping you in it. RetroOS Market is a 
 
 ---
 
+## Deployment Links
+
+### HEROKU
+
+[https://retroratdeploy-7212e4705943.herokuapp.com/](https://retroratdeploy-7212e4705943.herokuapp.com/)
+
+### AWS
+
+[http://retro-rat-aws-deploy-env.eba-xgmgvipp.eu-north-1.elasticbeanstalk.com/](http://retro-rat-aws-deploy-env.eba-xgmgvipp.eu-north-1.elasticbeanstalk.com/)
+
+---
+
 ## ✨ Radical Features
 
 Users exploring RetroRat will have full access to:
